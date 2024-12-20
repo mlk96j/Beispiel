@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرض المزيد/أقل</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: right;
+            margin: 20px;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h3 {
+            margin: 0 0 10px;
+            font-family: 'Ruqa', sans-serif; /* تطبيق خط الرقعة على العناوين */
+            font-size: 20px; /* تكبير حجم الخط للعناوين */
+        }
+        .text {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* عرض أول سطرين */
+            -webkit-box-orient: vertical;
+            font-size: 18px; /* تكبير حجم النص */
+        }
+        .text.expanded {
+            -webkit-line-clamp: unset; /* إظهار النص كاملاً عند التوسيع */
+        }
+        .toggle-btn {
+            cursor: pointer;
+            color: blue;
+            border: none;
+            background: none;
+            padding: 0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="section">
+        <h3>العنوان الأول</h3>
+        <div class="text" id="text1">
+            هذه أول جملة من النص الأول. هذه هي الجملة الثانية من النص الأول.
+            بقية النص هنا: الجملة الثالثة. الجملة الرابعة. الجملة الخامسة. الجملة السادسة. الجملة السابعة. الجملة الثامنة. الجملة التاسعة. الجملة العاشرة.
+        </div>
+        <button class="toggle-btn" onclick="toggleText('text1', this)">عرض المزيد</button>
+    </div>
+
+    <div class="section">
+        <h3>العنوان الثاني</h3>
+        <div class="text" id="text2">
+            هذه أول جملة من النص الثاني. هذه هي الجملة الثانية من النص الثاني.
+            بقية النص هنا: الجملة الثالثة. الجملة الرابعة. الجملة الخامسة. الجملة السادسة. الجملة السابعة. الجملة الثامنة. الجملة التاسعة. الجملة العاشرة.
+        </div>
+        <button class="toggle-btn" onclick="toggleText('text2', this)">عرض المزيد</button>
+    </div>
+
+    <script>
+        function toggleText(textId, button) {
+            const textElement = document.getElementById(textId);
+            textElement.classList.toggle('expanded');
+            if (textElement.classList.contains('expanded')) {
+                button.textContent = 'عرض أقل';
+            } else {
+                button.textContent = 'عرض المزيد';
+            }
+        }
+    </script>
+</body>
+</html>
