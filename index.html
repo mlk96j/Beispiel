@@ -44,25 +44,25 @@
 <body>
     <div class="section">
         <h3>العنوان الأول</h3>
-        <div class="text" id="text1">
+        <div class="text">
             هذه أول جملة من النص الأول. هذه هي الجملة الثانية من النص الأول.
             بقية النص هنا: الجملة الثالثة. الجملة الرابعة. الجملة الخامسة. الجملة السادسة. الجملة السابعة. الجملة الثامنة. الجملة التاسعة. الجملة العاشرة.
         </div>
-        <button class="toggle-btn" onclick="toggleText('text1', this)">عرض المزيد</button>
+        <button class="toggle-btn" onclick="toggleText(this)">عرض المزيد</button>
     </div>
 
     <div class="section">
         <h3>العنوان الثاني</h3>
-        <div class="text" id="text2">
+        <div class="text">
             هذه أول جملة من النص الثاني. هذه هي الجملة الثانية من النص الثاني.
             بقية النص هنا: الجملة الثالثة. الجملة الرابعة. الجملة الخامسة. الجملة السادسة. الجملة السابعة. الجملة الثامنة. الجملة التاسعة. الجملة العاشرة.
         </div>
-        <button class="toggle-btn" onclick="toggleText('text2', this)">عرض المزيد</button>
+        <button class="toggle-btn" onclick="toggleText(this)">عرض المزيد</button>
     </div>
 
     <script>
-        function toggleText(textId, button) {
-            const textElement = document.getElementById(textId);
+        function toggleText(button) {
+            const textElement = button.previousElementSibling;
             textElement.classList.toggle('expanded');
             if (textElement.classList.contains('expanded')) {
                 button.textContent = 'عرض أقل';
