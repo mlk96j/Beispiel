@@ -43,6 +43,6 @@ const infos = [
                ,
                "هذا هو الفقرة الثانية للمعلومة الثانية."],
         details: "تفاصيل إضافية للمعلومة الثانية."
-    },
+    }
     // Füge weitere Fakten hinzu, bis zu 40
 ];
