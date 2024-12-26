@@ -3,45 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>معلومات عن الأشجار</title>
+    <title>معلومات عن الأهرامات</title>
     <style>
         body {
+            margin: 0;
+            padding: 0;
             font-family: Arial, sans-serif;
             direction: rtl;
-            text-align: right;
-            margin: 20px;
+            text-align: center;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/e/e3/Kheops-Pyramid.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
         }
-        .content {
-            font-size: 20px;
+        .info-container {
+            margin: 100px auto;
+            max-width: 600px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .info-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .info-box {
             margin-bottom: 20px;
         }
-        .read-btn {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
+        #info-content p {
+            margin: 10px 0;
         }
-        .read-btn:hover {
-            background-color: #45a049;
+        .toggle-box {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        #more-details-button {
+            margin-top: 15px;
         }
     </style>
+    <script src="facts.js" defer></script>
 </head>
 <body>
-    <h1>معلومات عن الأشجار</h1>
-    <div class="content" id="treeInfo">
-        
-      الأشجار جزء مهم من الطبيعة. توفر الأكسجين، وتساعد في تقليل التلوث، وتعتبر موطنًا للعديد من الكائنات الحية. كما أنها تضيف جمالاً إلى البيئة وهناك عدة أنواع من الاشجار التي تنتج الفواكه والخضروات.
+    <div class="info-container">
+        <div class="info-box">
+            <div class="info-title" id="info-title">معلومات عن الأهرامات</div>
+            <p id="info-number">رقم المعلومة: 1</p>
+            <div id="info-content">
+                <p>هذه هي المعلومة الأولى.</p>
+            </div>
+        </div>
+        <div class="toggle-box" id="details-box">
+            <p id="details-content">تفاصيل إضافية عن المعلومة.</p>
+            <button onclick="toggleDetails(false)">عرض أقل</button>
+        </div>
+        <button id="more-details-button" onclick="toggleDetails(true)">عرض المزيد</button>
     </div>
-    <button class="read-btn" onclick="readText()">استمع إلى النص</button>
 
     <script>
-        function readText() {
-            const text = document.getElementById('treeInfo').textContent;
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = 'ar';
-            window.speechSynthesis.speak(utterance);
+        // Zufällige Info aus der externen Datenbank abrufen
+        document.addEventListener("DOMContentLoaded", () => {
+            const randomInfo = infos[Math.floor(Math.random() * infos.length)];
+            const infoNumber = document.getElementById('info-number');
+            const infoContent = document.getElementById('info-content');
+            const detailsContent = document.getElementById('details-content');
+
+            infoNumber.textContent = `رقم المعلومة: ${arabicNumbering(randomInfo.number)}`;
+
+            // Lösche vorherigen Inhalt und füge Absätze hinzu
+            infoContent.innerHTML = ""; 
+            randomInfo.main.forEach(paragraph => {
+                const p = document.createElement('p');
+                p.textContent = paragraph;
+                infoContent.appendChild(p);
+            });
+
+            detailsContent.textContent = randomInfo.details;
+        });
+
+        function toggleDetails(show) {
+            const detailsBox = document.getElementById('details-box');
+            const moreDetailsButton = document.getElementById('more-details-button');
+
+            if (show) {
+                detailsBox.style.display = 'block';
+                moreDetailsButton.style.display = 'none';
+            } else {
+                detailsBox.style.display = 'none';
+                moreDetailsButton.style.display = 'block';
+                moreDetailsButton.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // Funktion zur Konvertierung der Zahl in arabische Buchstaben
+        function arabicNumbering(number) {
+            const arabicNumbers = ["الأولى", "الثانية", "الثالثة", "الرابعة", "الخامسة", "السادسة", "السابعة", "الثامنة", "التاسعة", "العاشرة"];
+            return arabicNumbers[number - 1] || `رقم ${number}`;
         }
     </script>
 </body>
